@@ -9,6 +9,7 @@ headers = {
 }
 
 r = requests.get(baseUrl)
+
 soup = BeautifulSoup(r.content, 'lxml')
 
 productList = soup.find_all('div', class_="product")
@@ -32,12 +33,12 @@ for link in productLinks:
     precos.append(soup.find('div', class_="price").text)
 
 wb = openpyxl.Workbook()
+
 sheet = wb.active
 sheet.title = 'Produtos e Valor'
 
 sheet.cell(row=1, column=1).value = 'Produto'
 sheet.cell(row=1, column=2).value = 'Valor'
-
 
 for i in range(0, len(nomes)):
     sheet.cell(row=i+2, column=1).value = nomes[i]
